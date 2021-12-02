@@ -5,7 +5,7 @@ function Login() {
     return (
         <div class="container">
         <form class="form">
-            <h1 class="form_heading">Login</h1>
+            <h1 class="form_heading">User Login</h1>
             <div class="form_style">
                 <input type="text" class="input_style" autofocus placeholder="Username or email"/>
             </div>
