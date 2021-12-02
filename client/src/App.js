@@ -1,7 +1,9 @@
 import './App.css';
-import Login from './login/login';
-import Register from './login/register';
+import Login from './components/login/login';
+import Register from './components/login/register';
 
+
+const loadData = () => JSON.parse(JSON.stringify(jsonData));
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
   return (

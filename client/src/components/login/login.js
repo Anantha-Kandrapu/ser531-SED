@@ -1,7 +1,13 @@
 import React from 'react'
 import './loginstyle.css';
 import { Link } from 'react-router-dom';
+import jsonData from './users.json';
+
+// const loadData = () => JSON.parse(JSON.stringify(jsonData));
+
 function Login() {
+    console.log(jsonData);
+
     return (
         <div class="container">
         <form class="form">
