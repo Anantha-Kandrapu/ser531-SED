@@ -1,22 +1,27 @@
 import React from 'react'
 import './loginstyle.css';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 function Register() {
+    const [userinput, setUsername] = useState("");
+    const [emailInput,setuserEmail] = useState("");
+    const [passwordInput,setuserPassword] = useState("");
+    const [passwordConfirm,setconfirmPassword] = useState(""); 
     return(
         <div>
             <form>
             <h1 class="form_heading">Registration</h1>
             <div class="form_style">
-                <input type="text" class="input_style" autofocus placeholder="Username"/>
+                <input type="text" value = {userinput} class="input_style" autofocus placeholder="Username"/>
             </div>
             <div class="form_style">
-                <input type="text" class="input_style" autofocus placeholder="Email Address"/>
+                <input type="text" value = {emailInput} class="input_style" autofocus placeholder="Email Address"/>
             </div>
             <div class="form_style">
-                <input type="password" class="input_style" autofocus placeholder="Password"/>
+                <input type="password" value = {passwordInput} class="input_style" autofocus placeholder="Password"/>
             </div>
             <div class="form_style">
-                <input type="password" class="input_style" autofocus placeholder="Confirm password"/>
+                <input type="password" value = {passwordConfirm} class="input_style" autofocus placeholder="Confirm password"/>
             </div>
             <div class="form_style">
                 <input type="text" class="input_style" autofocus placeholder="Location"/>

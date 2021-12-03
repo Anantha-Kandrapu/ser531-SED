@@ -1,22 +1,20 @@
 import React from 'react'
 import './loginstyle.css';
 import { Link } from 'react-router-dom';
-import jsonData from './users.json';
-
-// const loadData = () => JSON.parse(JSON.stringify(jsonData));
+import { useState } from 'react';
 
 function Login() {
-    console.log(jsonData);
-
+    const [user, username] = useState("");
+    const [password,setPassword] = useState("");
     return (
         <div class="container">
         <form class="form">
             <h1 class="form_heading">User Login</h1>
             <div class="form_style">
-                <input type="text" class="input_style" autofocus placeholder="Username or email"/>
+                <input type="text" value = {user} class="input_style" autofocus placeholder="Username or email"/>
             </div>
             <div class="form_style">
-                <input type="password" class="input_style" autofocus placeholder="Password"/>
+                <input type="password" value ={password} class="input_style" autofocus placeholder="Password"/>
             </div>
             <button class="form_button" type="submit">Login</button>
             <p class="form_para">
