@@ -8,7 +8,7 @@ function Register() {
     const [passwordInput,setuserPassword] = useState("");
     const [passwordConfirm,setconfirmPassword] = useState(""); 
     return(
-        <div>
+        <div class="container">
             <form>
             <h1 class="form_heading">Registration</h1>
             <div class="form_style">
