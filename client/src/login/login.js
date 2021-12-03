@@ -32,7 +32,7 @@ function Login() {
                 </div>
                 <button class="form_button" onClick={handleClick} type="submit">Login</button>
                 <p class="form_para">
-                    <span >Don't have an account?<Link to={"/sign-up"}>Sign up</Link></span>
+                    <span >Don't have an account?<Link to={"/register"}>Sign up</Link></span>
                 </p>
 
         </div>
