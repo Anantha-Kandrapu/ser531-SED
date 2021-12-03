@@ -23,12 +23,7 @@ function Register() {
             <div class="form_style">
                 <input type="password" value = {passwordConfirm} class="input_style" autofocus placeholder="Confirm password"/>
             </div>
-            <div class="form_style">
-                <input type="text" class="input_style" autofocus placeholder="Location"/>
-            </div>
-            <div class="form_style">
-                <input type="text" class="input_style" autofocus placeholder="Event Preference"/>
-            </div>            
+            
             <button class="form_button" type="submit">Register</button>
             <p class="form_para">
             <span >Already have an account?<Link to={"/sign-in"}>Sign in</Link></span>
