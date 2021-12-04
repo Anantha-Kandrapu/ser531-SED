@@ -1,6 +1,6 @@
 import React from 'react'
 import './loginstyle.css';
-import { useContext, createContext, useState } from "react";
+import { useState } from "react";
 import { Navigate,Link} from "react-router-dom";
 import axios from 'axios'
 
@@ -15,7 +15,7 @@ function Login() {
             pass: password
         }).then((response) => {
             console.log(response.data);
-            if(response.data == 'success')
+            if(response.data === 'success')
                 setlogin(true)        
         })
     }

@@ -2,12 +2,20 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 import './events.css'
 function Event() {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
-
+  useEffect(async() =>{
+    await axios.post('http://localhost:5000/getlocations',{}).then((response) =>{
+      console.log('locs',response.data.results.bindings);
+    });
+    await axios.post('http://localhost:5000/getcategories',{}).then((response) =>{
+      console.log('cats',response.data.results.bindings);
+    })
+  },[])
   return (
     <div>
       <h1 class="eventheading"> Find the Events near you!! </h1>
