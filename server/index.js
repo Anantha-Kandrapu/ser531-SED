@@ -50,6 +50,21 @@ async function resL() {
     return x;
 };
 
+app.post('/getevents', async (req, res) => {
+    var filedata = fs.readFileSync('./data/events.json')
+    var data = JSON.parse(filedata);
+    var eventdata = data.events;
+    var check1 = []
+    for (var i = 0; i < eventdata.length; i++) {
+        if (eventdata[i].location.valueOf() == req.body.loc.valueOf() && eventdata[i].category.valueOf()== req.body.cat.valueOf()) {
+            
+            check1.push(eventdata[i])
+        }
+        console.log(typeof(eventdata[i].category),typeof(req.body.loc))
+    }
+    console.log(check1.length)
+    res.json(check1)
+})
 app.post('/getlocations', async (req, res) => {
     await axios.get(hostL + loc_data, {
         headers: {
@@ -61,7 +76,7 @@ app.post('/getlocations', async (req, res) => {
             'Cookie': cookieL
         },
     }).then((response) => {
-        res.json(response.data)
+        res.json({})
         return response.data;
     })
 })
@@ -103,7 +118,6 @@ const register = (name, password, email) => {
     var users = data.users;
     for (var i = 0; i < users.length; i++) {
         if (users[i].uname === name && users[i].pass === password) {
-            console.log(name, password);
             return 'fail'
         }
     }
@@ -121,11 +135,9 @@ const login = (name, password) => {
     var users = data.users;
     for (var i = 0; i < users.length; i++) {
         if (users[i].uname === name && users[i].pass === password) {
-            console.log(name, password);
             return 'success'
         }
     }
-    console.log()
     return 'fail'
 }
 const server = app.listen(5000, () => {

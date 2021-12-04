@@ -3,6 +3,15 @@ import './loginstyle.css';
 import { Link,Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
+import styled from 'styled-components'
+
+const Div = styled.div`
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    margin-top : 2%;
+    
+`;
 function Register() {
     const [register, setregister] = useState(false);
     const [message,setmessage] = useState(false);
@@ -24,6 +33,7 @@ function Register() {
     if (register)
         return <Navigate to="/" />
     return (
+        <Div>
         <div class="container">
             <h1 class="form_heading">Registration</h1>
             <div class="form_style">
@@ -41,6 +51,7 @@ function Register() {
                 <span >Already have an account <Link to={"/"}>Sign in</Link></span>
             </p>
         </div>
+        </Div>
     )
 }
 export default Register;

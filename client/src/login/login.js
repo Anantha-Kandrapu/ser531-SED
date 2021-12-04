@@ -3,7 +3,14 @@ import './loginstyle.css';
 import { useState } from "react";
 import { Navigate,Link} from "react-router-dom";
 import axios from 'axios'
+import styled from 'styled-components'
 
+const Div = styled.div`
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    margin-top : 2%;
+`;
 function Login() {
     const [username, setusername] = useState("");
     const [password, setPassword] = useState("");
@@ -22,6 +29,7 @@ function Login() {
     if(login)
     return <Navigate to="/event" />
     return (
+        <Div>
         <div class="container">
                 <h1 class="form_heading">User Login</h1>
                 <div class="form_style">
@@ -34,8 +42,8 @@ function Login() {
                 <p class="form_para">
                     <span >Don't have an account?<Link to={"/register"}>Sign up</Link></span>
                 </p>
-
         </div>
+        </Div>
     )
 }
 export default Login
