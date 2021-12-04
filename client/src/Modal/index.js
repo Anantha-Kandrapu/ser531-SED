@@ -1,8 +1,8 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ setOpenModal ,data}) =>{
-  console.log('data',data);
+const Modal = ({ setOpenModal, data }) => {
+  console.log('modaldata', data);
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -16,20 +16,17 @@ const Modal = ({ setOpenModal ,data}) =>{
           </button>
         </div>
         <div className="title">
-          <h1>{}</h1>
+          <h1>{data.event_name}</h1>
         </div>
         <div className="body">
-          <p>The next page looks amazing. Hope you want to go there!</p>
+          <p>Time : {data.time}</p>
+        </div>
+        <div>
+          <p className="footer">
+            Contact : {data.event_contact}</p>
         </div>
         <div className="footer">
-          <button
-            onClick={() => {
-              setOpenModal(false);
-            }}
-            id="cancelBtn"
-          >
-            Cancel
-          </button>
+          <p>Address : {data.location_desc}</p>
         </div>
       </div>
     </div>

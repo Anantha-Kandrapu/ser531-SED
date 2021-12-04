@@ -52,17 +52,17 @@ async function resL() {
 
 app.post('/getevents', async (req, res) => {
     var filedata = fs.readFileSync('./data/events.json')
+    const qloc = req.body.loc
+    const qcat = req.body.cat
     var data = JSON.parse(filedata);
-    var eventdata = data.events;
-    var check1 = []
+    const eventdata = data.events;
+    let check1 = []
     for (var i = 0; i < eventdata.length; i++) {
-        if (eventdata[i].location.valueOf() == req.body.loc.valueOf() && eventdata[i].category.valueOf()== req.body.cat.valueOf()) {
-            
+        if(eventdata[i].location === qloc && eventdata[i].category === qcat) {
             check1.push(eventdata[i])
         }
-        console.log(typeof(eventdata[i].category),typeof(req.body.loc))
     }
-    console.log(check1.length)
+    console.log(check1)
     res.json(check1)
 })
 app.post('/getlocations', async (req, res) => {
