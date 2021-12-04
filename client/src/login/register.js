@@ -33,7 +33,7 @@ function Register() {
     if (register)
         return <Navigate to="/" />
     return (
-        <Div>
+        <div className = "img_container">
         <div class="container">
             <h1 class="form_heading">Registration</h1>
             <div class="form_style">
@@ -51,7 +51,7 @@ function Register() {
                 <span >Already have an account <Link to={"/"}>Sign in</Link></span>
             </p>
         </div>
-        </Div>
+        </div>
     )
 }
 export default Register;

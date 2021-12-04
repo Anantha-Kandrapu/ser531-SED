@@ -29,21 +29,21 @@ function Login() {
     if(login)
     return <Navigate to="/event" />
     return (
-        <Div>
+        <div class = "img_container">
         <div class="container">
                 <h1 class="form_heading">User Login</h1>
                 <div class="form_style">
                     <input type="text" value={username} onChange={e => setusername(e.target.value)} class="input_style" placeholder="Username or email" />
                 </div>
                 <div class="form_style">
-                    <input type="text" value={password} onChange={e => setPassword(e.target.value)} class="input_style" placeholder="Password" />
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} class="input_style" placeholder="Password" />
                 </div>
                 <button class="form_button" onClick={handleClick} type="submit">Login</button>
                 <p class="form_para">
                     <span >Don't have an account?<Link to={"/register"}>Sign up</Link></span>
                 </p>
         </div>
-        </Div>
+        </div>
     )
 }
 export default Login
