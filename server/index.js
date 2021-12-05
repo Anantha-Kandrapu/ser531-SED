@@ -12,9 +12,9 @@ const hostE = 'http://ec2-13-233-151-149.ap-south-1.compute.amazonaws.com:3030/E
 const cookieL = 'JSESSIONID=node01ibi9n9b60b9i10xak0npucepa10.node0'
 const hostL = 'http://ec2-13-233-151-149.ap-south-1.compute.amazonaws.com:3030/Location/query?'
 
-const cat_data = `query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+myp%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fsarthak%2Fontologies%2F2021%2F10%2Funtitled-ontology-17%23%3E%0A%0ASELECT+%3Fcategory%0AWHERE+%7B%0A++%3Fsubject+myp%3Ahas_Name+%3Fcategory%0A%7D`
+const cat_data = `query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+myp%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fsarthak%2Fontologies%2F2021%2F10%2Funtitled-ontology-17%23%3E%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT+%3Fid%3Fcat%0AWHERE+%7B%0A++++%3Fsubject+myp%3Ahas_ID+%3Fid+.%0A++++%3Fsubject+myp%3Ahas_Name+%3Fcat+.%0A%7D`
 const eve_data = `query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+myp%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fkalyanreddy%2Fontologies%2F2021%2F10%2Funtitled-ontology-9%23%3E%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT+%3Fevent%0AWHERE+%7B%0A++%3Fsubject+myp%3Ahas_LocID+%3Fevent.%0A++FILTER(%3Fevent+%3D+%22989.0%22%5E%5Exsd%3Astring).%0A%7D%0ALimit+100`
-const loc_data = `query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+myp%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fsarthak%2Fontologies%2F2021%2F10%2Funtitled-ontology-13%23%3E%0APREFIX+eve%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fkalyanreddy%2Fontologies%2F2021%2F10%2Funtitled-ontology-9%23%3E%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%0ASELECT+%3Fid+%3Fdescription+%3Fcity%0AWHERE+%7B%0A++%3Fsubject+myp%3Ahas_ID+%3Fid.%0A++%3Fsubject+myp%3Ahas_Descriptions+%3Fdescription.%0A++%3Fsubject+myp%3Ain_City+%3Fcity.%0A++FILTER(%3Fid+%3D+%2215.0%22%5E%5Exsd%3Astring).%0A%7D%0AORDER+BY+%3Fcity`
+const loc_data = `query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+myp%3A+%3Chttp%3A%2F%2Fwww.semanticweb.org%2Fsarthak%2Fontologies%2F2021%2F10%2Funtitled-ontology-13%23%3E%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0ASELECT+%3Fid+%3Fplace%0AWHERE+%7B%0A++%3Fsubject+myp%3Ahas_ID+%3Fid.%0A++%3Fsubject+myp%3Ain_City+%3Fplace.%0A%7D`
 
 
 const resE = () => {
@@ -76,7 +76,14 @@ app.post('/getlocations', async (req, res) => {
             'Cookie': cookieL
         },
     }).then((response) => {
-        res.json({})
+        const op = response.data.results.bindings;
+        const locs = [];
+        for(var i = 0;i < op.length; ++i){
+            const x = {id: op[i].id.value,place : op[i].place.value};
+            locs.push(x)
+        }
+        // console.log(locs)
+        res.json({locs})
         return response.data;
     })
 })
@@ -91,7 +98,14 @@ app.post('/getcategories', async (req, res) => {
             'Cookie': cookieC
         },
     }).then((response) => {
-        res.json(response.data)
+        const op = response.data.results.bindings;
+        const cats = [];
+        for(var i = 0;i < op.length; ++i){
+            const x = {id: op[i].id.value,category : op[i].cat.value};
+            cats.push(x)
+        }
+        // console.log(cats)
+        res.json({cats})
         return response.data;
     })
 })
