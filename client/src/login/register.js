@@ -3,15 +3,7 @@ import './loginstyle.css';
 import { Link,Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
-import styled from 'styled-components'
 
-const Div = styled.div`
-    display : flex;
-    align-items : center;
-    justify-content : center;
-    margin-top : 2%;
-    
-`;
 function Register() {
     const [register, setregister] = useState(false);
     const [message,setmessage] = useState(false);

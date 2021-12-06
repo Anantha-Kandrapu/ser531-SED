@@ -3,14 +3,7 @@ import './loginstyle.css';
 import { useState } from "react";
 import { Navigate,Link} from "react-router-dom";
 import axios from 'axios'
-import styled from 'styled-components'
 
-const Div = styled.div`
-    display : flex;
-    align-items : center;
-    justify-content : center;
-    margin-top : 2%;
-`;
 function Login() {
     const [username, setusername] = useState("");
     const [password, setPassword] = useState("");

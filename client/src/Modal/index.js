@@ -16,23 +16,29 @@ const Modal = ({ setOpenModal, data }) => {
           </button>
         </div>
         <div className="title">
-          <h1>{data.event_name}</h1>
+          <h1>{data.name}</h1>
         </div>
         <div className="body">
-          <p>Time : {data.time}</p>
+            <p> {data.desc}</p>
+        </div>
+        <div className="body">
+          <p>Time : {data.starttime} to {data.endtime}</p>
         </div>
         <div>
           <p className="footer">
-            Contact : {data.event_contact}</p>
+            Email : {data.email}</p>
         </div>
         <div className="body">
-        <p>event_link: <a href={data.event_link}>{data.event_link}</a></p>
+        <p>phone: {data.num}</p>
         </div>
         <div className="footer">
           <p>Address : {data.location_desc}</p>
         </div>
         <div className="body">
-          <p>Date : {data.date}</p>
+          <p>Date : {data.day + data.month + data.year}</p> 
+        </div>
+        <div className="body">
+          <p>Cost : {data.cost}</p>
         </div>
         <div className="body">
           <p>About : {data.event_desc}</p>

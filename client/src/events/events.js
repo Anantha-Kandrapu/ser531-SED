@@ -58,7 +58,7 @@ const Styles = styled.div`
 `;
 function Event() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [index,setindex] = useState(-1);
+  const [index, setindex] = useState(-1);
   const [locations, setlocations] = useState([]);
   const [categories, setCategories] = useState(['Consert', 'Sports', 'CareerFair', 'Conference', 'Parties', 'Gettogether', 'Movie', 'Contest', 'Festival']);
   const [qlocation, setqlocation] = useState();
@@ -74,15 +74,16 @@ function Event() {
       console.log('cats', response.data);
       setCategories(response.data.cats);
     })
-  //   // await axios.post('http://localhost:5000/getevents', {}).then((response) => {
-  //   //   console.log('eves', response.data.results.bindings)
-  //   // })
+    // await axios.post('http://localhost:5000/getevents', {}).then((response) => {
+    //   setevents(response.data)
+    //   console.log('eves', response.data)
+    // })
+
   }, [])
   const handleSearch = async () => {
-    await axios.post('http://localhost:5000/getevents', { loc: qlocation, cat: qcategory }).then((response) => {
+    await axios.post('http://localhost:5000/getevents', {}).then((response) => {
+      setevents(response.data.eves)
       console.log('eves', response.data)
-      setevents(response.data)
-
     })
   }
   return (
@@ -92,16 +93,14 @@ function Event() {
         <div>
           <h1> Find the Events near you!! </h1>
           <label>Select Location<label className="text-danger">*</label></label>
-          <select aria-label="available" required value={qlocation} onChange={(e) => {setqlocation(e.target.value)}} >
+          <select aria-label="available" required value={qlocation} onChange={(e) => { setqlocation(e.target.value) }} >
             <option value="Select an option">Select an option</option>
             {locations.map(loc => (
               <option value={loc.id}>{loc.place}</option>
             ))}
           </select>
-
-
           <label>Select Category<label className="text-danger">*</label></label>
-          <select aria-label="available" required value={qcategory} onChange={(e) => {setqcategory(e.target.value)}} >
+          <select aria-label="available" required value={qcategory} onChange={(e) => { setqcategory(e.target.value) }} >
             <option value="Select an option">Select an option</option>
 
             {categories.map(cat => (
@@ -118,29 +117,26 @@ function Event() {
             <tr>
               <th>Event Name</th>
               <th>Event Location</th>
-              <th>Registeration Link</th>
+              <th>Email</th>
               <th> Action </th>
             </tr>
           </thead>
           <tbody>
-            {events.map((row,i) => (
+            {events.map((row, i) => (
               <tr id={row.id}>
-                 <td>{row.event_name}</td>
-               <td>{row.location}</td>
-                <td>{row.event_link}</td>
+                <td>{row.name}</td>
+                <td>{qlocation}</td>
+                <td>{row.email}</td>
                 <td>  <button
-        className="openModalBtn"
-        onClick={() => {setModalOpen(true);setindex(i)}}>
-        Show More
-      </button></td>
-             </tr>
+                  className="openModalBtn"
+                  onClick={() => { setModalOpen(true); setindex(i) }}>
+                  Show More
+                </button></td>
+              </tr>
             ))
-        }
-           </tbody>
-  
-      </table>
-
-
+            }
+          </tbody>
+        </table>
       </Styles>
     </Div>
   )
